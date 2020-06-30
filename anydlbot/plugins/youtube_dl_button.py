@@ -272,7 +272,7 @@ async def youtube_dl_call_back(bot, update):
                 elif tg_send_type == "file":
                     await bot.send_document(
                         chat_id=update.message.chat.id,
-                        document=download_directory,
+                        document=current_file_name,
                         thumb=thumb_image_path,
                         caption=description,
                         parse_mode="HTML",
@@ -303,7 +303,7 @@ async def youtube_dl_call_back(bot, update):
                 elif tg_send_type == "video":
                     await bot.send_video(
                         chat_id=update.message.chat.id,
-                        video=download_directory,
+                        video=current_file_name,
                         caption=description,
                         parse_mode="HTML",
                         duration=duration,

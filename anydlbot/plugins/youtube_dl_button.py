@@ -332,22 +332,25 @@ async def youtube_dl_call_back(bot, update):
                     if is_w_f:
                         caption = "/upgrade to Plan D to remove the watermark\n© @AnyDLBot"
                     for image in images:
-                        if os.path.exists(image):
-                            if i == 0:
-                                media_album_p.append(
-                                    InputMediaPhoto(
-                                        media=image,
-                                        caption=caption,
-                                        parse_mode="html"
+                        try:
+                            if os.path.isfile(image):
+                                if i == 0:
+                                    media_album_p.append(
+                                            InputMediaPhoto(
+                                                media=image,
+                                                caption=caption,
+                                                parse_mode="html"
+                                            )
                                     )
-                                )
-                            else:
-                                media_album_p.append(
-                                    InputMediaPhoto(
-                                        media=image
-                                    )
-                                )
-                            i = i + 1
+                                else:
+                                    media_album_p.append(
+                                            InputMediaPhoto(
+                                                media=image
+                                                )
+                                            )
+                                    i = i + 1
+                        except TypeError:
+                            pass
                 await bot.send_media_group(
                     chat_id=update.message.chat.id,
                     disable_notification=True,
